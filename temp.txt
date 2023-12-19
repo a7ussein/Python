@@ -1,0 +1,45 @@
+# guessing game 
+# the user pick a number at random
+# the user should then be asked t enter a starting range value and ending range value.
+# The computer should inform the player that they will guess the number the player is thinking of in a number of guesses
+# equal to the saquare root of the difference of the highest value minus the lowest value squareRoot(highestValue - lowestValue)
+# ask the user if the value of the guessed was too high or too low or correct. 
+# if correct the declare winning
+# if too high then the highest value should be set to 1 - last guess. 
+# if too low then the lowest value should be set to last guess + 1.
+# The next guess should be determined by a function that returns the median between the highest and lowest value. 
+# Before each guess the computer should announce what guess it is on and how many guesses it has left and the value that it is guessing.
+# if at any time the high value is less than the low value or the low value is greater than the high value, the computer should tell the player they are cheating.
+# if the computer runs out of guesses before getting the correct answer, it should declare the player the winner and end the game
+import math
+
+print("-------- GUESSING GAME -------- ")
+input("Think about a random number then press the enter key: ")
+startingRange = int(input("Enter a starting range value: "))
+endingRange = int(input("Enter an ending range: "))
+maxGuesses = int(math.sqrt(endingRange - startingRange))
+
+for i in range(1, maxGuesses + 1):
+    guess = math.ceil((startingRange + endingRange)/2)
+    print("Guess number: " , i)
+    print("My guess is " , guess)
+    print("Number of guesses left: " , maxGuesses - i)
+    
+    wasItCorrect = input("Was my guess too high, too low, or correct? ").lower
+    if wasItCorrect == "too high":
+        endingRange = guess - 1
+    elif wasItCorrect =="too low":
+        startingRange = guess + 1
+    elif wasItCorrect == "correct":
+        print("I win")
+        break 
+    else:
+        print("Invalid input")
+
+# Check if the user is cheating
+    if endingRange < startingRange:
+        print("Hmmm something seems off, it looks like you are cheating....")
+        break
+
+# If the loop is complete without a correct guess
+    print("You win!")   
